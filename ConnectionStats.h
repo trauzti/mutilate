@@ -56,13 +56,13 @@ class ConnectionStats {
   void log_get(Operation& op) {
      if (sampling) get_sampler.sample(op); 
      gets++; 
-     printf("get: %lf\n", op.time());
+     fprintf(stderr, "get %lf\n", op.time());
   }
 
   void log_set(Operation& op) { 
     if (sampling) set_sampler.sample(op); 
     sets++; 
-    printf("get: %lf\n", op.time());
+    fprintf(stderr, "set %lf\n", op.time());
   }
 
   void log_op (double op)     { 
