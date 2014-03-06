@@ -53,9 +53,21 @@ class ConnectionStats {
 
   bool sampling;
 
-  void log_get(Operation& op) { if (sampling) get_sampler.sample(op); gets++; }
-  void log_set(Operation& op) { if (sampling) set_sampler.sample(op); sets++; }
-  void log_op (double op)     { if (sampling)  op_sampler.sample(op); }
+  void log_get(Operation& op) {
+     if (sampling) get_sampler.sample(op); 
+     gets++; 
+     printf("get: %lf\n", op.time());
+  }
+
+  void log_set(Operation& op) { 
+    if (sampling) set_sampler.sample(op); 
+    sets++; 
+    printf("get: %lf\n", op.time());
+  }
+
+  void log_op (double op)     { 
+    if (sampling) op_sampler.sample(op); 
+  }
 
   double get_qps() {
     return (gets + sets) / (stop - start);
@@ -92,12 +104,9 @@ class ConnectionStats {
 #ifdef USE_ADAPTIVE_SAMPLER
     for (auto i: cs.get_sampler.samples) { 
        get_sampler.sample(i); //log_get(i);
-       printf("get: %lf\n", i.time());
-       
     }
     for (auto i: cs.set_sampler.samples) {
       set_sampler.sample(i); //log_set(i);
-       printf("set: %lf\n", i.time());
     }
     for (auto i: cs.op_sampler.samples)  op_sampler.sample(i); //log_op(i);
 #else
