@@ -90,8 +90,15 @@ class ConnectionStats {
 
   void accumulate(const ConnectionStats &cs) {
 #ifdef USE_ADAPTIVE_SAMPLER
-    for (auto i: cs.get_sampler.samples) get_sampler.sample(i); //log_get(i);
-    for (auto i: cs.set_sampler.samples) set_sampler.sample(i); //log_set(i);
+    for (auto i: cs.get_sampler.samples) { 
+       get_sampler.sample(i); //log_get(i);
+       printf("get: %lf\n", i.time());
+       
+    }
+    for (auto i: cs.set_sampler.samples) {
+      set_sampler.sample(i); //log_set(i);
+       printf("set: %lf\n", i.time());
+    }
     for (auto i: cs.op_sampler.samples)  op_sampler.sample(i); //log_op(i);
 #else
     get_sampler.accumulate(cs.get_sampler);
