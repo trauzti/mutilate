@@ -1058,7 +1058,10 @@ void args_to_options(options_t* options) {
   //  if (args.no_record_scale_given)
   //    options->records = args.records_arg;
   //  else
-  options->records = args.records_arg / options->server_given;
+  if (options->server_given) 
+    options->records = args.records_arg / options->server_given;
+  else
+    options->records = args.records_arg;
 
   options->binary = args.binary_given;
   options->sasl = args.username_given;
