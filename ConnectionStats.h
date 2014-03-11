@@ -17,7 +17,7 @@
 #include "Operation.h"
 
 
-#define PRINT_GET_SET_LATENCY 1
+#define PRINT_GET_SET_LATENCY 0
 
 using namespace std;
 
