@@ -16,6 +16,9 @@
 #include "AgentStats.h"
 #include "Operation.h"
 
+
+#define PRINT_GET_SET_LATENCY 1
+
 using namespace std;
 
 class ConnectionStats {
@@ -56,13 +59,17 @@ class ConnectionStats {
   void log_get(Operation& op) {
      if (sampling) get_sampler.sample(op); 
      gets++; 
+#ifdef PRINT_GET_SET_LATENCY
      fprintf(stderr, "get %lf\n", op.time());
+#endif
   }
 
   void log_set(Operation& op) { 
     if (sampling) set_sampler.sample(op); 
     sets++; 
+#ifdef PRINT_GET_SET_LATENCY
     fprintf(stderr, "set %lf\n", op.time());
+#endif
   }
 
   void log_op (double op)     { 
