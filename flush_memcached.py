@@ -15,3 +15,4 @@ s.send("flush_all\r\n")
 print s.recv(1024)
 s.send("quit\r\n")
 print s.recv(1024)
+print "flush_all sent to %s" % server
