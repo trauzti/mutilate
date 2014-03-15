@@ -60,7 +60,7 @@ class ConnectionStats {
      if (sampling) get_sampler.sample(op); 
      gets++; 
 #if PRINT_GET_SET_LATENCY
-     fprintf(stderr, "get %lf\n", op.time());
+     fprintf(stderr, "#get %lf\n", op.time());
 #endif
   }
 
@@ -68,7 +68,7 @@ class ConnectionStats {
     if (sampling) set_sampler.sample(op); 
     sets++; 
 #if PRINT_GET_SET_LATENCY
-    fprintf(stderr, "set %lf\n", op.time());
+    fprintf(stderr, "#set %lf\n", op.time());
 #endif
   }
 
